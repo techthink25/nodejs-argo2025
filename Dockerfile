@@ -1,15 +1,11 @@
-FROM node:alpine3.20
+FROM node:22-alpine AS build
+WORKDIR /app
+COPY package.json .
+RUN npm install --omit=dev
 
-WORKDIR /tmp
-
-COPY . .
-
-EXPOSE 3000/tcp
-
-RUN apk update && apk upgrade &&\
-    apk add --no-cache openssl curl gcompat iproute2 coreutils &&\
-    apk add --no-cache bash &&\
-    chmod +x index.js &&\
-    npm install
-
+FROM node:22-alpine
+WORKDIR /app
+COPY --from=build /app/node_modules ./node_modules
+COPY index.js package.json ./
+EXPOSE 3000
 CMD ["node", "index.js"]

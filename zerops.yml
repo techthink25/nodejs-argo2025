@@ -1,0 +1,23 @@
+zerops:
+  - setup: nodejsargo
+    build:
+      base: nodejs@22
+      buildCommands:
+        - npm install
+      deployFiles:
+        - index.js
+        - package.json
+        - node_modules
+      cache: node_modules
+    run:
+      base: nodejs@22
+      ports:
+        - port: 3000
+          httpSupport: true
+      envVariables:
+        NEZHA_SERVER: ""
+        NEZHA_KEY: ""
+        ARGO_DOMAIN: ""
+        ARGO_AUTH: ""
+        NAME: "ZeroPS"
+      start: node index.js
