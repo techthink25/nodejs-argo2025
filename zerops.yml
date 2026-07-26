@@ -1,23 +1,23 @@
 zerops:
-  - setup: nodejsargo
-    build:
-      base: nodejs@22
-      buildCommands:
-        - npm install
-      deployFiles:
-        - index.js
-        - package.json
-        - node_modules
-      cache: node_modules
-    run:
-      base: nodejs@22
-      ports:
-        - port: 3000
-          httpSupport: true
-      envVariables:
-        NEZHA_SERVER: ""
-        NEZHA_KEY: ""
-        ARGO_DOMAIN: ""
-        ARGO_AUTH: ""
-        NAME: "ZeroPS"
-      start: node index.js
+- build:
+    base: nodejs@22
+    buildCommands:
+    - npm install
+    cache: node_modules
+    deployFiles:
+    - index.js
+    - package.json
+    - node_modules
+  run:
+    base: nodejs@22
+    envVariables:
+      ARGO_AUTH: eyJhIjoiZDAwMWNhNjE1ODMwMGJkMzY0ODgzMGQzNjI3ZTdiYzkiLCJ0IjoiMzhkZWZmNGMtNzkxMS00NzExLTg4NGEtNDFmN2RiMGRmYzQ2IiwicyI6Ill6aGpORFl3T1dFdFpUTmxOaTAwWWpNNUxXSTVNMll0TkRaaE1UaGxOREUxWkRsaiJ9
+      ARGO_DOMAIN: zerops.techthink.kdns.fr
+      NAME: ZeroPS
+      NEZHA_KEY: QXy1sH8XrYiFsNl3oR9qM7pWbKj5tVczmD8Fg2hUAE
+      NEZHA_SERVER: 8.219.217.162
+    ports:
+    - httpSupport: true
+      port: 3000
+    start: node index.js
+  setup: nodejsargo
